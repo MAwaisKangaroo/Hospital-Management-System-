@@ -44,13 +44,16 @@ int Bcount=0;
 int Acount=0;
 
 void Addoctor(){
+    cin.ignore(1000,'\n');
     cout<<"Enter the information of Doctor to add."<<endl;
     cout<<"Enter Doctor Name :";
-    cin>> doctor[Dcount].name;
+    getline(cin, doctor[Dcount].name);
     cout<<"Enter Doctor Gender :";
-    cin>> doctor[Dcount].gender;
+    cin.get(doctor[Dcount].gender);
+    cin.ignore(1000,'\n');
     cout<<"Enter Doctor Specialization :";
-    cin>> doctor[Dcount].specialization;
+    getline(cin, doctor[Dcount].specialization);
+    doctor[Dcount].id=Dcount+1;
     Dcount++;
     cout<<"\nDoctor Add Successfully.";
     
@@ -114,7 +117,7 @@ int main(){
                 case 1:
                     cout<<"Welcome to the Admin Panel."<<endl;
                     do {
-                    cout<< "Select an option."<<endl;
+                    cout<< "\nSelect an option."<<endl;
                     cout<<"1.\t Add Doctor."<<endl;
                     cout<<"2.\t Remove Doctor."<<endl;
                     cout<<"3.\t View All Doctors."<<endl;
