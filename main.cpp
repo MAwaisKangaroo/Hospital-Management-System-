@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 struct Doctor{
@@ -91,6 +92,67 @@ void Vbill(){
         cout<<"\t"<<bill[i].billid<<"\t\t"<<bill[i].patientid<<"\t\t"<<bill[i].totalammount<<"\t\t"<<bill[i].paid<<endl;
     }
 }
+void Bappointment(){
+    int doctorid;
+    int patientid;
+    string date;
+    int counter=0;
+    cout<<"Enter information to Book Appoinment."<< endl;
+    cout<<"Enter Patient ID :";
+    cin>> patientid;
+    cout<<"Enter Doctor ID :";
+    cin>> doctorid;
+    cout<<"Enter Appoinment Date(DD-MM-YYYY) :";
+    cin>>date;
+    for (int i=0;i<Acount; i++) {
+        if(appoinment[i].doctorid == doctorid && appoinment[i].date == date){
+            counter++;
+        }
+    }
+        if(counter < 5){
+            appoinment[Acount].doctorid=doctorid;
+            appoinment[Acount].patientid=patientid;
+            appoinment[Acount].date=date;
+            Acount++;
+            cout<<"Docotor Appoint successfully."<<endl;
+        }
+        else{
+            cout<<"\nDoctor already has book for the date"<<date<<endl;
+        }
+}
+void Cappoinment(){
+    int patientid;
+    int doctorid;
+    string date;
+    cout<<"Enter Information to cancel doctor Appoinment."<<endl;
+    cout<<"Enter patient id :";
+    cin>>patientid;
+    cout<<"Enter Doctor id :";
+    cin>>doctorid;
+    cout<<"Enteer Date of Appoinment(DD-MM-YYYY) :";
+    cin>>date;
+    for(int i=0;i<Acount;i++){
+        if(appoinment[i].patientid==patientid && appoinment[i].doctorid==doctorid && appoinment[i].date==date){
+            for(int j=i;j>Acount-1;j++){
+                appoinment[j]=appoinment[j+1];
+            }
+            Acount--;
+            cout<<"Appoinment canecled."<<endl;
+            return ;
+        }
+    }
+    cout<<"Appoinment is not Found."<<endl;
+}
+void Vappoinment(){
+    if (Acount==0){
+        cout<<"No appoinment Booked."<<endl;
+        return;
+    }
+    cout<<"\tNo\t\tPatient ID\t\tDoctor ID\t\tDate"<<endl;
+    for(int i=0;i<Acount;i++){
+        cout<<"\t"<<i+1<<"\t\t"<<appoinment[i].patientid<<"\t\t\t\t"<<appoinment[i].doctorid<<"\t\t\t"<<appoinment[i].date<<endl;
+    }
+}
 
 int main(){
     
@@ -154,6 +216,33 @@ int main(){
                     break;
                 case 3:
                     cout<<"Welcome to the Docotr Appoinment Section."<<endl;
+                    do{
+                    cout<< "\nSelect an option."<<endl;
+                    cout<<"1.\t Book Appoinment"<<endl;
+                    cout<<"2.\t Cancel Appoinment."<<endl;
+                    cout<<"3.\t View All Appoinments."<<endl;
+                    cout<<"0.\t Exit."<<endl;
+                    cin>>c;
+                    
+                    switch (c)
+                    {
+                    case 1:
+                            Bappointment();
+                        break;
+                    case 2:
+                            Cappoinment();
+                        break;
+                    case 3:
+                            Vappoinment();
+                        break;
+                    case 0:
+                            cout<< "Exit."<<endl;
+                        break;
+                    default:
+                        cout<<"Invalide Input."<<endl;
+                        break;
+                    }
+                    } while (c!=0);
                     break;
                 case 4:
                     cout<<"Welcome to the Billing section."<<endl;
@@ -172,4 +261,3 @@ int main(){
         cout<< "Username or Password is Incorrect";
     return 0;
 }
-
