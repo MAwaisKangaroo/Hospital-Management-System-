@@ -7,7 +7,7 @@ struct Doctor{
     string name;
     char gender;
     string specialization;
-    
+
 };
 struct Patient{
     int id;
@@ -17,14 +17,14 @@ struct Patient{
     string bloodgroup;
     string address;
     string disease;
-    
+
 };
 struct Appoinment{
     int appoinmentid;
     int patientid;
     int doctorid;
     string date;
-    
+
 };
 struct Bill{
     int billid;
@@ -33,7 +33,7 @@ struct Bill{
     float treatmentcharges;
     float totalammount;
     bool paid;
-    
+
 };
 Doctor doctor[50];
 Patient patient[200];
@@ -57,7 +57,7 @@ void Addoctor(){
     doctor[Dcount].id=Dcount+1;
     Dcount++;
     cout<<"\nDoctor Add Successfully.";
-    
+
 }
 void Rmdoctor(){
     int id;
@@ -153,11 +153,36 @@ void Vappoinment(){
         cout<<"\t"<<i+1<<"\t\t"<<appoinment[i].patientid<<"\t\t\t\t"<<appoinment[i].doctorid<<"\t\t\t"<<appoinment[i].date<<endl;
     }
 }
-
+void Addbill(){
+cout<<"Enter Patient ID :";
+cin>>bill[Bcount].patientid;
+bill[Bcount].billid=Bcount+1;
+cout<<"Enter Medicine Charges :";
+cin>>bill[Bcount].medicineCharges;
+cout<<"Enter Treatment Charges :";
+cin>>bill[Bcount].treatmentcharges;
+bill[Bcount].totalammount=bill[Bcount].medicineCharges+bill[Bcount].treatmentcharges;
+bill[Bcount].paid=false;
+Bcount++;
+cout<<"Bill added successfully."<<endl;
+}
+void Paybill(){
+int id;
+cout<<"Enter Bill ID to Pay :";
+cin>>id;
+for(int i=0;i<Bcount;i++){
+if(bill[i].billid==id){
+bill[i].paid=true;
+cout<<"Bill Paid Successfully."<<endl;
+return;
+}
+}
+cout<<"Bill not found."<<endl;
+}
 int main(){
-    
-   
-    
+
+
+
     cout << "welcome to Hospital Manegment  Sytem "<< endl;
     string Username,Password;
     int n,a,b,c,d;
@@ -165,7 +190,7 @@ int main(){
     getline(cin, Username);
     cout<<"Enter Password :";
     getline(cin, Password);
-    if(Username=="Kangaroo Dev" && Password =="A2M1H1")
+    if(Username=="11" && Password =="1")
     {cout<<"Login Successful";
         do {
             cout<< "Select a option to perform task."<<endl;
@@ -223,7 +248,7 @@ int main(){
                     cout<<"3.\t View All Appoinments."<<endl;
                     cout<<"0.\t Exit."<<endl;
                     cin>>c;
-                    
+
                     switch (c)
                     {
                     case 1:
@@ -246,11 +271,26 @@ int main(){
                     break;
                 case 4:
                     cout<<"Welcome to the Billing section."<<endl;
-                    break;
+                    do {
+                        cout<<"\nBilling Menu:\n1.Add Bill\n2.View All Bills\n3.Pay Bill\n0.Back\nSelect:";
+                        cin>>d;
+                        switch(d){
+                        case 1:
+                            Addbill();
+                           break;
+                        case 2:
+                             Vbill();
+                           break;
+                        case 3:
+                            Paybill();
+                           break;
+                          }
+                        } while(b!=0);
+                        break;
                 case 0:
                     cout<<"System Logout."<<endl;
                     break;
-                
+
                 default:
                     cout<<"Invalid Input";
                     break;
