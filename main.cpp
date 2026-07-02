@@ -153,6 +153,31 @@ void Vappoinment(){
         cout<<"\t"<<i+1<<"\t\t"<<appoinment[i].patientid<<"\t\t\t\t"<<appoinment[i].doctorid<<"\t\t\t"<<appoinment[i].date<<endl;
     }
 }
+void Addbill(){
+cout<<"Enter Patient ID :";
+cin>>bill[Bcount].patientid;
+bill[Bcount].billid=Bcount+1;
+cout<<"Enter Medicine Charges :";
+cin>>bill[Bcount].medicineCharges;
+cout<<"Enter Treatment Charges :";
+cin>>bill[Bcount].treatmentcharges;
+bill[Bcount].totalammount=bill[Bcount].medicineCharges+bill[Bcount].treatmentcharges;
+bill[Bcount].paid=false;
+Bcount++;
+cout<<"Bill added successfully."<<endl;
+}
+void Paybill() {
+int id;
+cout<<"Enter Bill ID to Pay :";
+cin>>id;
+for(int i=0;i<Bcount;i++){
+if(bill[i].billid==id){
+bill[i].paid=true;
+cout<<"Bill Paid Successfully."<<endl;
+return; }
+}
+cout<<"Bill not found."<<endl;
+}
 
 int main(){
     
@@ -246,6 +271,21 @@ int main(){
                     break;
                 case 4:
                     cout<<"Welcome to the Billing section."<<endl;
+                    do {
+                        cout<<"\nBilling Menu:\n1.Add Bill\n2.View All Bills\n3.Pay Bill\n0.Back\nSelect:";
+                        cin>>b;
+                        switch(b){
+                        case 1:
+                            Addbill();
+                           break;
+                        case 2:
+                            Vbill(); 
+                           break;
+                        case 3:
+                            Paybill();
+                           break;
+                          }
+                        } while(b!=0);
                     break;
                 case 0:
                     cout<<"System Logout."<<endl;
